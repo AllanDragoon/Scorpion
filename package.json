@@ -1,0 +1,19 @@
+{
+  "name": "scorpion",
+  "version": "1.0.0",
+  "description": "So far nothing",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AllanDragoon/Scorpion.git"
+  },
+  "author": "Allan Li",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AllanDragoon/Scorpion/issues"
+  },
+  "homepage": "https://github.com/AllanDragoon/Scorpion#readme"
+}
