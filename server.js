@@ -10,7 +10,7 @@ var server = new WebPackDevServer(webpack(config), {
     }
 });
 
-servevr.app.get('*', function(req, res){
+server.app.get('*', function(req, res){
     res.sendFile(__dirname + '/index.html');
 });
 
