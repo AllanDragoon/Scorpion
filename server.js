@@ -7,11 +7,8 @@ var server = new WebPackDevServer(webpack(config), {
     progress: true,
     state:{
         colors: true
-    }
-});
-
-server.app.get('*', function(req, res){
-    res.sendFile(__dirname + '/index.html');
+    },
+    contentBase: './debug'
 });
 
 server.listen(8089, function(){

@@ -2,7 +2,7 @@
   "name": "scorpion",
   "version": "1.0.0",
   "description": "So far nothing",
-  "main": "app.js",
+  "main": "./src/app.jsx",
   "scripts": {
     "dev": "node server.js",
     "dist": "webpack --config webpack.config.dist.js --progress --colors --display-error-details"

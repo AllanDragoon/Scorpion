@@ -17,14 +17,14 @@ var APP_PATH = path.resolve(ROOT_PATH, 'src');
 // app.js路径
 var APP_FILE = path.resolve(APP_PATH, 'app');
 // 发布文件所存在的目录
-var BUILD_PATH = path.resolve(ROOT_PATH, '/scorpion/dist');
+var BUILD_PATH = path.resolve(ROOT_PATH, 'debug');
 
 module.exports = {
     entry: {
         app: APP_FILE
     },
     output: {
-        publicPath: 'scorpion/dist/', // 编译好的文件，在服务器的路径，这是静态资源引用路径
+        publicPath: '/debug/', // 编译好的文件，在服务器的路径，这是静态资源引用路径
         path: BUILD_PATH, // 编译到当前目录
         filename: '[name].js', // 编译后的文件名字
         chunkFilename: '[name].[chunkhash:5].min.js'
@@ -75,8 +75,11 @@ module.exports = {
             hash: false,
         }),
         new ExtractTextPlugin('[name].css')
-    ]    ,
+    ],
     resolve: {
         extensions: ['', '.js', '.jsx', '.less', '.scss', '.css'], //后缀名自动补全
+    },
+    devServer: {
+        contentBase: "./debug"
     }
 };
