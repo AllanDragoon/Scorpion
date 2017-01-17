@@ -14,8 +14,8 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ROOT_PATH = path.resolve(__dirname);
 // __dirname中的src目录，以此类推
 var APP_PATH = path.resolve(ROOT_PATH, 'src');
-// app.js路径
-var APP_FILE = path.resolve(APP_PATH, 'app');
+// index.js路径
+var APP_FILE = path.resolve(APP_PATH, 'index');
 // 发布文件所存在的目录
 var BUILD_PATH = path.resolve(ROOT_PATH, 'debug');
 
