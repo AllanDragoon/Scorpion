@@ -21,7 +21,7 @@ var BUILD_PATH = path.resolve(ROOT_PATH, 'debug');
 
 module.exports = {
     entry: {
-        app: APP_FILE
+        index: APP_FILE
     },
     output: {
         publicPath: '/debug/', // 编译好的文件，在服务器的路径，这是静态资源引用路径
@@ -29,6 +29,8 @@ module.exports = {
         filename: '[name].js', // 编译后的文件名字
         chunkFilename: '[name].[chunkhash:5].min.js'
     },
+    debug: true,
+    devtool: 'inline-source-map',
     module: {
         loaders:[{
             test: /\.js$/,
