@@ -2,8 +2,10 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 const HeaderComp = ({ title, menu }) => (
-    <div>
-        <h1>{title}</h1>
+    <header className="head-list" >
+        {
+            title && <span className="head_title">{title}</span>
+        }
         <ul>
             {
                 menu.map((item) => (
@@ -11,7 +13,7 @@ const HeaderComp = ({ title, menu }) => (
                 ))
             }
         </ul>
-    </div>
+    </header>
 );
 
 HeaderComp.propTypese = {
