@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/AllanDragoon/Scorpion#readme",
   "dependencies": {
+    "bootstrap": "^3.3.7",
     "immutable": "^3.8.1",
     "react": "^15.4.2",
     "react-bootstrap": "^0.30.7",
