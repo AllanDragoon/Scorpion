@@ -8,6 +8,7 @@ var ROOT_PATH = path.resolve(__dirname);
 var APP_PATH = path.resolve(ROOT_PATH, 'src'); //__dirname 中的src目录，以此类推
 var APP_FILE = path.resolve(APP_PATH, 'index'); //根目录文件index.jsx地址
 var BUILD_PATH = path.resolve(ROOT_PATH, 'scorpion/dist'); //发布文件所存放的目录/pxq/dist/前面加/报错？
+var NODE_MODULES = path.resolve(ROOT_PATH, 'node_modules');
 
 
 module.exports = {
@@ -41,7 +42,8 @@ module.exports = {
         }, {
             test: /\.less$/,
             exclude: /^node_modules$/,
-            loader: ExtractTextPlugin.extract('style', ['css', 'autoprefixer', 'less'])
+            loader: ExtractTextPlugin.extract('style', ['css', 'autoprefixer', 'less']),
+            include: [APP_PATH, path.resolve(NODE_MODULES, 'bootstrap')]
         }, {
             test: /\.scss$/,
             exclude: /^node_modules$/,
@@ -49,12 +51,14 @@ module.exports = {
         }, {
             test: /\.(eot|woff|svg|ttf|woff2|gif|appcache)(\?|$)/,
             exclude: /^node_modules$/,
-            loader: 'file-loader?name=[name].[ext]'
+            loader: 'file-loader?name=[name].[ext]',
+            include: [APP_PATH, path.resolve(NODE_MODULES, 'bootstrap')]
         }, {
             test: /\.(png|jpg|gif)$/,
             exclude: /^node_modules$/,
             loader: 'url-loader?limit=8192&name=images/[hash:8].[name].[ext]',
             //注意后面那个limit的参数，当你图片大小小于这个限制的时候，会自动启用base64编码图
+            include: [APP_PATH, path.resolve(NODE_MODULES, 'bootstrap')]
         }, {
             test: /\.jsx$/,
             exclude: /^node_modules$/,

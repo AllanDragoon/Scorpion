@@ -18,6 +18,8 @@ var APP_PATH = path.resolve(ROOT_PATH, 'src');
 var APP_FILE = path.resolve(APP_PATH, 'index');
 // 发布文件所存在的目录
 var BUILD_PATH = path.resolve(ROOT_PATH, 'debug');
+// node_modules
+var NODE_MODULES = path.resolve(ROOT_PATH, 'node_modules');
 
 module.exports = {
     entry: {
@@ -41,7 +43,7 @@ module.exports = {
             test: /\.less$/,
             exclude: /^node_modules$/,
             loader: ExtractTextPlugin.extract('style', ['css', 'autoprefixer', 'less']),
-            include: [APP_PATH]
+            include: [APP_PATH, path.resolve(NODE_MODULES, 'bootstrap')]
         }, {
             test: /\.scss$/,
             exclude: /^node_modules$/,
@@ -51,13 +53,13 @@ module.exports = {
             test: /\.(eot|woff|svg|ttf|woff2|gif|appcache)(\?|$)/,
             exclude: /^node_modules$/,
             loader: 'file-loader?name=[name].[ext]',
-            include: [APP_PATH]
+            include: [APP_PATH, path.resolve(NODE_MODULES, 'bootstrap')]
         }, {
             test: /\.(png|jpg)$/,
             exclude: /^node_modules$/,
             loader: 'url-loader?limit=8192&name=images/[hash:8].[name].[ext]',
             //注意后面那个limit的参数，当你图片大小小于这个限制的时候，会自动启用base64编码图片
-            include: [APP_PATH]
+            include: [APP_PATH, path.resolve(NODE_MODULES, 'bootstrap')]
         }, {
             test: /\.jsx$/,
             exclude: /^node_modules$/,
