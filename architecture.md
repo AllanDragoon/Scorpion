@@ -11,7 +11,12 @@
    b. 修改逻辑数据->subscribe->修改图形
    需要注意的是防止出现循环调用。
 
-
+[Allan:] 2017/01/20
+1. 在node_modules添加了react_bootstrap, 用yarn add
+2. react_bootstrap里面没有bootstrap里面的style，因此还需要添加
+   bootstrap在node_modules里面，并引用它的less文件。并且在webpack config
+   中修改那些loaders。
+3. 实现里一个初步的header
 
 
 
