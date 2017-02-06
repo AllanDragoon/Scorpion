@@ -18,5 +18,13 @@
    中修改那些loaders。
 3. 实现里一个初步的header
 
+[Allan:] 2017/01/25
+1. react_bootstrap里面提供的控件功能是在有限，连手机界面顶部的toolbar也
+   实现不好，所以放弃之。
+2. 找到两个比较好的适合web app界面的UI框架库：
+   Onsen: https://onsen.io/blog/cordova-hybrid-app-with-react-redux-webpack/
+   Material-UI: http://www.material-ui.com/#/components/app-bar
+   
+
 
 
