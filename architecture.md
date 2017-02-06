@@ -25,6 +25,11 @@
    Onsen: https://onsen.io/blog/cordova-hybrid-app-with-react-redux-webpack/
    Material-UI: http://www.material-ui.com/#/components/app-bar
    
+[Allan:] 2017/02/06
+1. 用Cordova包装了一个three.js的网页，发现android 4不支持webgj，因此用threejs来
+   画图是不合适的。
+2. 测试了以下d3.js - 用cordova包装了一个d3.js的网页，可以进行zoom，pan以及画svg等
+   功能。因此准备用d3.js。
 
 
 
