@@ -1,11 +1,21 @@
 import React from 'react';
+import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+
 import Header from './header';
-import 'bootstrap/less/bootstrap.less';
+
+injectTapEventPlugin();
 
 const App = () => (
-    <div>
-        <Header />
-    </div>
+    <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
+        <div className="app">
+            <Header />
+            <div className="page">                
+            </div>
+        </div>
+    </MuiThemeProvider>
 );
 
-export default Header;
+export default App;
