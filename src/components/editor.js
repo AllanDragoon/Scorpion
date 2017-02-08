@@ -6,10 +6,20 @@ class Editor extends Component {
         super(props);
         // 必须bind，否则在zoomed执行的时候this会是svg
         this.zoomed = this.zoomed.bind(this);
+        this.handleWindowOrientationChange = this.handleWindowOrientationChange.bind(this);
+        window.addEventListener('orientationchange', this.handleWindowOrientationChange);
     }
 
     componentDidMount() {
-        var pixelsPerMeter = 10;
+        this.updateInternal();
+    }
+
+    componentDidUpdate() {
+        this.updateInternal();
+    }
+
+    updateInternal() {
+        var pixelsPerMeter = 20;
         var extents = this.calculateExtents(pixelsPerMeter);
 
         // Bind zoom
@@ -26,11 +36,6 @@ class Editor extends Component {
         this.renderGrid(extents, pixelsPerMeter);
     }
 
-    componentDidUpdate() {
-        // Draw grid
-        this.renderGrid();
-    }
-
     zoomed() {
         var containerNode = this.refs.container;
         var transform = d3.event.transform;
@@ -39,27 +44,41 @@ class Editor extends Component {
                 "translate(" + transform.x + "," + transform.y + ")scale(" + transform.k + ")");
     }
 
+    handleWindowOrientationChange() {
+        var orientation = screen.orientation.angle;
+        // http://stackoverflow.com/questions/39642266/svg-mobile-orientation-change
+        if (orientation % 90 === 0) {
+            d3.select(this.refs.svg)
+                .attr('x', 0);
+        }
+    }
+
     calculateExtents(pixelsPerMeter) {
         // 获取svg的宽和高
         // http://stackoverflow.com/questions/21990857/d3-js-how-to-get-the-computed-width-and-height-for-an-arbitrary-element
         var rect = this.refs.svg.getBoundingClientRect();
         var svgWidth = rect.width;
         var svgHeight = rect.height;
- 
+        // 中心
+        var centerX = parseInt(svgWidth / 2);
+        var centerY = parseInt(svgHeight / 2);
+
         // 在svg大小的基础上各边分别外扩50米
         const extend = 50 * pixelsPerMeter;
 
         // 计算网格起至
-        var widthStart = -extend;
-        var widthEnd = parseInt(svgWidth / pixelsPerMeter) * pixelsPerMeter + extend; 
-        var heightStart = -extend;
-        var heightEnd = parseInt(svgHeight / pixelsPerMeter) * pixelsPerMeter + extend;
+        var widthStart = centerX - parseInt(centerX / pixelsPerMeter) * pixelsPerMeter -extend;
+        var widthEnd = centerX + parseInt((svgWidth - centerX) / pixelsPerMeter) * pixelsPerMeter + extend; 
+        var heightStart = centerY - parseInt(centerY / pixelsPerMeter) * pixelsPerMeter -extend;
+        var heightEnd = centerY + parseInt((svgHeight - centerY) / pixelsPerMeter) * pixelsPerMeter + extend;
 
         return {
             widthStart,
             widthEnd,
             heightStart,
-            heightEnd
+            heightEnd,
+            centerX,
+            centerY
         };
     }
 
@@ -70,27 +89,40 @@ class Editor extends Component {
 
         // 画横线        
         var xlinesNode = this.refs.xlines;
-        d3.select(xlinesNode)
+        var xlines = d3.select(xlinesNode)
             .selectAll('line')
-            .data(heightRange)
-            .enter()
+            .data(heightRange);
+        xlines.enter()
             .append('line')
-                .attr('x1', extents.widthStart)
-                .attr('y1', d => d)
-                .attr('x2', extents.widthEnd)
-                .attr('y2', d => d);
+            .attr('x1', extents.widthStart)
+            .attr('y1', d => d)
+            .attr('x2', extents.widthEnd)
+            .attr('y2', d => d);
+        xlines.exit().remove();
 
         // 画竖线
         var ylinesNode = this.refs.ylines;
-        d3.select(ylinesNode)
+        var ylines = d3.select(ylinesNode)
             .selectAll('line')
-            .data(widthRange)
-            .enter()
+            .data(widthRange);
+        ylines.enter()
             .append('line')
-                .attr('x1', d => d)
-                .attr('y1', extents.heightStart)
-                .attr('x2', d => d)
-                .attr('y2', extents.heightEnd);
+            .attr('x1', d => d)
+            .attr('y1', extents.heightStart)
+            .attr('x2', d => d)
+            .attr('y2', extents.heightEnd);
+        ylines.exit().remove();
+
+        // 画中心点
+        var center = d3.select(this.refs.center)
+            .selectAll('circle')
+            .data([{ centerX: extents.centerX, centerY: extents.centerY }]);
+        center.enter()
+            .append('circle')
+            .attr('r', 5)
+            .attr('cx', d => d.centerX)
+            .attr('cy', d => d.centerY);
+        center.exit().remove();
     }
 
     render() {
@@ -99,6 +131,7 @@ class Editor extends Component {
                 <g ref='container'>
                     <g className="x axis" ref="xlines"></g>
                     <g className="y axis" ref="ylines"></g>
+                    <g className="center" ref="center"></g>
                 </g>
             </svg>
         );
