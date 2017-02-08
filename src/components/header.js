@@ -5,8 +5,7 @@ import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import FlatButton from 'material-ui/FlatButton';
 import Toggle from 'material-ui/Toggle';
-import MenuIcon from 'material-ui/svg-icons/navigation/menu';
-import NavigationClose from 'material-ui/svg-icons/navigation/close';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 
 class Login extends Component {
   static muiName = 'FlatButton';
@@ -22,7 +21,7 @@ const Logged = (props) => (
   <IconMenu
     {...props}
     iconButtonElement={
-      <IconButton><MenuIcon /></IconButton>
+      <IconButton><MoreVertIcon /></IconButton>
     }
     targetOrigin={{horizontal: 'right', vertical: 'top'}}
     anchorOrigin={{horizontal: 'right', vertical: 'top'}}
@@ -40,6 +39,11 @@ Logged.muiName = 'IconMenu';
  * to render different components depending on the application state.
  */
 class Header extends Component {
+  constructor() {
+    super();
+    this.handleLeftButtonTouchTap = this.handleLeftButtonTouchTap.bind(this);
+  }
+
   state = {
     logged: true,
   };
@@ -48,13 +52,17 @@ class Header extends Component {
     this.setState({logged: logged});
   };
 
+  handleLeftButtonTouchTap = (event) => {
+    console.log('Header left button tapped!');
+  };
+
   render() {
     return (
       <div>
         <AppBar
           title="Scorpion"
-          iconElementLeft={<IconButton><NavigationClose /></IconButton>}
           iconElementRight={<Logged />}
+          onLeftIconButtonTouchTap={this.handleLeftButtonTouchTap}
         />
       </div>
     );
