@@ -5,7 +5,7 @@ import store from './store/index';
 import App from './components/app';
 
 import './style/style.scss';
-import './style/graphic.scss'
+import './style/graphic.css'
 
 render(
     <Provider store={store}>

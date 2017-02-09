@@ -40,6 +40,11 @@ module.exports = {
             loader: 'babel',
             include: [APP_PATH]
         },{
+            test: /\.css$/,
+            exclude: /^node_modules$/,
+            loader: ExtractTextPlugin.extract('style', ['css', 'autoprefixer']),
+            include: [APP_PATH]
+        }, {
             test: /\.less$/,
             exclude: /^node_modules$/,
             loader: ExtractTextPlugin.extract('style', ['css', 'autoprefixer', 'less']),
