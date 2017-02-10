@@ -34,42 +34,7 @@ html, body {
         overflow-x: hidden;
         overflow-y: auto;
         backface-visibility: hidden;
-        will-change: overflow;
-
-        .full-page {
-            display: flex;
-            width: 100%;
-            height: 90vh;
-            flex-direction: row;
-            align-items: center;
-            
-            &.full-blue {
-                background: #00bcd4;
-            }
-
-            &.full-red {
-                background: #f4645f;
-            }
-
-            .clock {
-                font-size: 5em;
-                font-weight: 300;
-                font-family: 'Lato';
-                width: 100%;
-                text-align: center;
-                height: 100px;
-                color: #fff;
-                position: relative;
-
-                .circular {
-                    position: absolute !important;
-                    top: -160px;
-                    left: 0;
-                    width: 100%;
-                    text-align: center;
-                }
-            }
-        }
+        will-change: overflow;        
     }
 }
 
@@ -82,4 +47,45 @@ html, body {
 
 .padding {
     padding: 20px;
+}
+
+.drawBtnContainer {  
+   path {
+        fill: rgba(0,0,0,0.7);
+    }
+
+    .btn {
+        position: absolute;
+        padding: 0;
+    }
+
+    .left {
+        bottom: 94px;
+        right: 148px;
+        svg {
+            transform: rotate(-90deg);
+        }
+    }
+
+    .right {
+        bottom: 94px;
+        right: 40px;
+
+        svg {
+            transform: rotate(90deg);
+        }
+    }
+
+    .up {
+        bottom: 148px;
+        right: 94px;
+    }
+    .down {
+        bottom: 40px;
+        right: 94px;
+
+        svg {
+            transform: rotate(180deg);
+        }
+    }
 }
