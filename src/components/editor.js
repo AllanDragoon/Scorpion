@@ -4,10 +4,9 @@ import * as d3 from 'd3';
 class Editor extends Component {
     constructor(props) {
         super(props);
+
         // 必须bind，否则在zoomed执行的时候this会是svg
         this.zoomed = this.zoomed.bind(this);
-        this.handleWindowOrientationChange = this.handleWindowOrientationChange.bind(this);
-        window.addEventListener('orientationchange', this.handleWindowOrientationChange);
     }
 
     componentDidMount() {
@@ -42,15 +41,6 @@ class Editor extends Component {
         d3.select(containerNode).
             attr("transform", 
                 "translate(" + transform.x + "," + transform.y + ")scale(" + transform.k + ")");
-    }
-
-    handleWindowOrientationChange() {
-        var orientation = screen.orientation.angle;
-        // http://stackoverflow.com/questions/39642266/svg-mobile-orientation-change
-        if (orientation % 90 === 0) {
-            d3.select(this.refs.svg)
-                .attr('x', 0);
-        }
     }
 
     calculateExtents(pixelsPerMeter) {
@@ -127,7 +117,9 @@ class Editor extends Component {
 
     render() {
         return (
-            <svg width='100%' height='100%' ref='svg'>
+            <svg width={this.props.width ? this.props.width + 'px' : '100%'}
+                height={this.props.height ? this.props.height + 'px': '100%'}
+                ref='svg'>
                 <g ref='container'>
                     <g className="x axis" ref="xlines"></g>
                     <g className="y axis" ref="ylines"></g>
