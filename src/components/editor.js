@@ -10,14 +10,10 @@ class Editor extends Component {
     }
 
     componentDidMount() {
-        this.updateInternal();
+        this.renderInternal();
     }
 
-    componentDidUpdate() {
-        this.updateInternal();
-    }
-
-    updateInternal() {
+    renderInternal() {
         var pixelsPerMeter = 20;
         var extents = this.calculateExtents(pixelsPerMeter);
 
