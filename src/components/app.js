@@ -4,8 +4,11 @@ import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import IconButton from 'material-ui/IconButton';
-import ArrowIcon from 'material-ui/svg-icons/maps/navigation';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import UpIcon from 'material-ui/svg-icons/hardware/keyboard-arrow-up';
+import DownIcon from 'material-ui/svg-icons/hardware/keyboard-arrow-down';
+import LeftIcon from 'material-ui/svg-icons/hardware/keyboard-arrow-left';
+import RightIcon from 'material-ui/svg-icons/hardware/keyboard-arrow-right';
 
 import Header from './header';
 import Editor from './editor';
@@ -35,11 +38,6 @@ class App extends Component {
             width: 48,
             height: 48
         };
-        const buttonStyle = {
-            width: 48,
-            height: 48,
-            padding: 0
-        };
 
         return (
             <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
@@ -52,24 +50,24 @@ class App extends Component {
                     </Measure>
                     <div className="drawBtnContainer">
                         <div className="btn up">
-                            <IconButton style={buttonStyle} iconStyle={iconStyle}>
-                                <ArrowIcon />
-                            </IconButton>
+                            <FloatingActionButton iconStyle={iconStyle}>
+                                <UpIcon />
+                            </FloatingActionButton>
                         </div>
                         <div className="btn down">
-                            <IconButton style={buttonStyle} iconStyle={iconStyle}>
-                                <ArrowIcon />
-                            </IconButton>
+                            <FloatingActionButton iconStyle={iconStyle}>
+                                <DownIcon />
+                            </FloatingActionButton>
                         </div>
                         <div className="btn left">
-                            <IconButton style={buttonStyle} iconStyle={iconStyle}>
-                                <ArrowIcon />
-                            </IconButton>
+                            <FloatingActionButton iconStyle={iconStyle}>
+                                <LeftIcon />
+                            </FloatingActionButton>
                         </div>
                         <div className="btn right">
-                            <IconButton style={buttonStyle} iconStyle={iconStyle}>
-                                <ArrowIcon />
-                            </IconButton>
+                            <FloatingActionButton iconStyle={iconStyle}>
+                                <RightIcon />
+                            </FloatingActionButton>
                         </div>
                     </div>
                 </div>                

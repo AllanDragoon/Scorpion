@@ -50,42 +50,27 @@ html, body {
 }
 
 .drawBtnContainer {  
-   path {
-        fill: rgba(0,0,0,0.7);
-    }
-
     .btn {
         position: absolute;
         padding: 0;
     }
 
     .left {
-        bottom: 94px;
-        right: 148px;
-        svg {
-            transform: rotate(-90deg);
-        }
+        bottom: 74px;
+        right: 128px;
     }
 
     .right {
-        bottom: 94px;
-        right: 40px;
-
-        svg {
-            transform: rotate(90deg);
-        }
+        bottom: 74px;
+        right: 20px;
     }
 
     .up {
-        bottom: 148px;
-        right: 94px;
+        bottom: 128px;
+        right: 74px;
     }
     .down {
-        bottom: 40px;
-        right: 94px;
-
-        svg {
-            transform: rotate(180deg);
-        }
+        bottom: 20px;
+        right: 74px;
     }
 }
