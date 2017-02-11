@@ -27,9 +27,10 @@ class App extends Component {
     }
 
     handleMeasure(dimensions) {
+        const headerHeight = 64;
         this.setState({
             width: dimensions.width,
-            height: dimensions.height
+            height: dimensions.height - headerHeight
         });
     }
 
