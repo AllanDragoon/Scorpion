@@ -18,6 +18,16 @@ class Editor extends Component {
             originY: undefined,
             pixelsPerMeter: 20
         };
+
+        this._edges = [
+            // {
+            //     start: {x: 0, y: 0}, 
+            //     end: {x: 4, y:0}
+            // },
+            // {
+            //     ...
+            // }
+        ];
     }
 
     componentDidMount() {
@@ -41,6 +51,8 @@ class Editor extends Component {
 
         // Draw grid
         this.renderGrid();
+
+        this.renderEdges();
     }
 
     zoomed() {
@@ -79,6 +91,35 @@ class Editor extends Component {
             centerY,
             pixelsPerMeter
         };
+    }
+
+    newEdge(direction, distance) {
+        var edges = this._edges;
+
+        var last = { x: 0, y: 0};
+        if (edges.length > 0) {
+            last = edges[edges.length - 1].end;
+        }
+
+        var start = Object.assign({}, last);
+        var end = Object.assign({}, start);
+        switch (direction) {
+            case 'up':
+                end.y += distance;
+                break;
+            case 'down':
+                end.y -= distance;
+                break;
+            case 'left':
+                end.x -= distance;
+                break;
+            case 'right':
+                end.x += distance;
+                break;
+        }
+
+        edges.push({start, end});
+        this.renderEdges();
     }
 
     renderGrid() {
@@ -126,6 +167,61 @@ class Editor extends Component {
         center.exit().remove();
     }
 
+    renderEdges() {
+        var self = this;
+        var edge = d3.select(this.refs.edges)
+            .selectAll('.wall')
+            .data(this._edges);
+
+        // Update
+        edge.selectAll('line')
+            .attr('x1', d => self.getPixelX(d.start.x))
+            .attr('y1', d => self.getPixelY(d.start.y))
+            .attr('x2', d => self.getPixelX(d.end.x))
+            .attr('y2', d => self.getPixelY(d.end.y));
+        
+        edge.selectAll('.startPt')
+            .attr('cx', d => self.getPixelX(d.start.x))
+            .attr('cy', d => self.getPixelY(d.start.y));
+
+        edge.selectAll('.endPt')
+            .attr('cx', d => self.getPixelX(d.end.x))
+            .attr('cy', d => self.getPixelY(d.end.y));
+
+        // Enter
+        var g = edge.enter()
+            .append('g')
+            .attr('class', 'wall');
+        g.append('line')
+            .attr('x1', d => self.getPixelX(d.start.x))
+            .attr('y1', d => self.getPixelY(d.start.y))
+            .attr('x2', d => self.getPixelX(d.end.x))
+            .attr('y2', d => self.getPixelY(d.end.y));
+        g.append('circle')
+            .attr('class', 'startPt')
+            .attr('r', 3)
+            .attr('cx', d => self.getPixelX(d.start.x))
+            .attr('cy', d => self.getPixelY(d.start.y));
+        g.append('circle')
+            .attr('class', 'endPt')
+            .attr('r', 3)
+            .attr('cx', d => self.getPixelX(d.end.x))
+            .attr('cy', d => self.getPixelY(d.end.y));
+
+        // Exit
+        edge.exit().remove();
+    }
+
+    getPixelX(x) {
+        var {centerX, pixelsPerMeter} = this._viewpoortInfo;
+        return x * pixelsPerMeter + centerX;
+    }
+
+    getPixelY(y) {
+        var {centerY, pixelsPerMeter} = this._viewpoortInfo; 
+        return -y * pixelsPerMeter + centerY;
+    }
+
     render() {
         return (
             <svg width={this.props.width ? this.props.width + 'px' : '100%'}
@@ -135,6 +231,7 @@ class Editor extends Component {
                     <g className="x axis" ref="xlines"></g>
                     <g className="y axis" ref="ylines"></g>
                     <g className="center" ref="center"></g>
+                    <g ref="edges"></g>
                 </g>
             </svg>
         );

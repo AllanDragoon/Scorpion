@@ -24,6 +24,7 @@ class App extends Component {
         };
 
         this.handleMeasure = this.handleMeasure.bind(this);
+        this.handleNewEdge = this.handleNewEdge.bind(this);
     }
 
     handleMeasure(dimensions) {
@@ -32,6 +33,10 @@ class App extends Component {
             width: dimensions.width,
             height: dimensions.height - headerHeight
         });
+    }
+
+    handleNewEdge(direction) {
+        this.refs.editor.newEdge(direction, 4);
     }
 
     render() {
@@ -51,22 +56,22 @@ class App extends Component {
                     </Measure>
                     <div className="drawBtnContainer">
                         <div className="btn up">
-                            <FloatingActionButton iconStyle={iconStyle}>
+                            <FloatingActionButton iconStyle={iconStyle} onClick={() => this.handleNewEdge('up')}>
                                 <UpIcon />
                             </FloatingActionButton>
                         </div>
                         <div className="btn down">
-                            <FloatingActionButton iconStyle={iconStyle}>
+                            <FloatingActionButton iconStyle={iconStyle} onClick={() => this.handleNewEdge('down')}>
                                 <DownIcon />
                             </FloatingActionButton>
                         </div>
                         <div className="btn left">
-                            <FloatingActionButton iconStyle={iconStyle}>
+                            <FloatingActionButton iconStyle={iconStyle} onClick={() => this.handleNewEdge('left')}>
                                 <LeftIcon />
                             </FloatingActionButton>
                         </div>
                         <div className="btn right">
-                            <FloatingActionButton iconStyle={iconStyle}>
+                            <FloatingActionButton iconStyle={iconStyle} onClick={() => this.handleNewEdge('right')}>
                                 <RightIcon />
                             </FloatingActionButton>
                         </div>

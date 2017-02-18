@@ -16,6 +16,18 @@
   vector-effect: non-scaling-stroke;
 }
 
+.wall line {
+  fill: none;
+  stroke: #202020;
+  stroke-width: 2px;
+  shape-rendering: crispEdges;
+}
+
+.wall circle {
+  fill: white;
+  stroke: brown;
+}
+
 .center circle{
   fill: green;
   stroke: none;
