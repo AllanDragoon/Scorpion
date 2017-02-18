@@ -25,7 +25,8 @@ class Editor extends Component {
             //     end: {x: 4, y:0}
             // },
             // {
-            //     ...
+            //     start: {x: 4, y:0},
+            //     end: {x: 4, y: 4}, 
             // }
         ];
     }
@@ -101,8 +102,9 @@ class Editor extends Component {
             last = edges[edges.length - 1].end;
         }
 
-        var start = Object.assign({}, last);
-        var end = Object.assign({}, start);
+        // Object.assign is not supported by android 4.4.4
+        var start = {x: last.x, y: last.y};
+        var end = {x: start.x, y: start.y};
         switch (direction) {
             case 'up':
                 end.y += distance;

@@ -56,22 +56,22 @@ class App extends Component {
                     </Measure>
                     <div className="drawBtnContainer">
                         <div className="btn up">
-                            <FloatingActionButton iconStyle={iconStyle} onClick={() => this.handleNewEdge('up')}>
+                            <FloatingActionButton iconStyle={iconStyle} onTouchTap={() => this.handleNewEdge('up')}>
                                 <UpIcon />
                             </FloatingActionButton>
                         </div>
                         <div className="btn down">
-                            <FloatingActionButton iconStyle={iconStyle} onClick={() => this.handleNewEdge('down')}>
+                            <FloatingActionButton iconStyle={iconStyle} onTouchTap={() => this.handleNewEdge('down')}>
                                 <DownIcon />
                             </FloatingActionButton>
                         </div>
                         <div className="btn left">
-                            <FloatingActionButton iconStyle={iconStyle} onClick={() => this.handleNewEdge('left')}>
+                            <FloatingActionButton iconStyle={iconStyle} onTouchTap={() => this.handleNewEdge('left')}>
                                 <LeftIcon />
                             </FloatingActionButton>
                         </div>
                         <div className="btn right">
-                            <FloatingActionButton iconStyle={iconStyle} onClick={() => this.handleNewEdge('right')}>
+                            <FloatingActionButton iconStyle={iconStyle} onTouchTap={() => this.handleNewEdge('right')}>
                                 <RightIcon />
                             </FloatingActionButton>
                         </div>
