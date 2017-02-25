@@ -30,6 +30,10 @@ class App extends Component {
         this.handleDistanceChange = this.handleDistanceChange.bind(this);
     }
 
+    componentDidMount() {
+        this.refs.distanceField.textField.input.type = 'number';
+    }
+
     handleMeasure(dimensions) {
         const headerHeight = 64;
         this.setState({
