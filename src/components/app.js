@@ -9,6 +9,8 @@ import UpIcon from 'material-ui/svg-icons/hardware/keyboard-arrow-up';
 import DownIcon from 'material-ui/svg-icons/hardware/keyboard-arrow-down';
 import LeftIcon from 'material-ui/svg-icons/hardware/keyboard-arrow-left';
 import RightIcon from 'material-ui/svg-icons/hardware/keyboard-arrow-right';
+import Paper from 'material-ui/Paper';
+import NumberInput from 'material-ui-number-input';
 
 import Header from './header';
 import Editor from './editor';
@@ -25,6 +27,7 @@ class App extends Component {
 
         this.handleMeasure = this.handleMeasure.bind(this);
         this.handleNewEdge = this.handleNewEdge.bind(this);
+        this.handleDistanceChange = this.handleDistanceChange.bind(this);
     }
 
     handleMeasure(dimensions) {
@@ -36,13 +39,32 @@ class App extends Component {
     }
 
     handleNewEdge(direction) {
-        this.refs.editor.newEdge(direction, 4);
+        var distance = parseFloat(this.distance);
+        if (isNaN(distance) || distance == 0)
+            return;
+        this.refs.editor.newEdge(direction, distance / 1000);
+    }
+
+    handleDistanceChange(event, newValue) {
+        this.distance = newValue;
     }
 
     render() {
         const iconStyle = { 
             width: 48,
             height: 48
+        };
+
+        const paperStyle = {
+            height: 48,
+            width: 180,
+            margin: 5,
+            textAlign: 'center',
+            display: 'inline-block'
+        };
+
+        const distanceStyle = {
+            width: 140
         };
 
         return (
@@ -54,6 +76,14 @@ class App extends Component {
                             <Editor ref="editor" width={this.state.width} height={this.state.height} />
                         </div>
                     </Measure>
+                    <div className="valuePaper">
+                        <Paper style={paperStyle} zDepth={3} rounded={false}>
+                            <NumberInput ref="distanceField" hintText="测量长度(mm)" 
+                                style={distanceStyle} onChange={this.handleDistanceChange}
+                                strategy="warn"
+                               />
+                        </Paper>
+                    </div>
                     <div className="drawBtnContainer">
                         <div className="btn up">
                             <FloatingActionButton iconStyle={iconStyle} onTouchTap={() => this.handleNewEdge('up')}>
