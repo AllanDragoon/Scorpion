@@ -32,4 +32,6 @@
    功能。因此准备用d3.js。
 
 
-
+[Allan:] 2017/04/04
+1. d3.js和Material-UI都已经用上了， so far so good.
+2. 下一步，准备用redux将数据和图形分离。
